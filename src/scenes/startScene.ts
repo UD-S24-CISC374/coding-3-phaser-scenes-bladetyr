@@ -21,8 +21,8 @@ export default class startScene extends Phaser.Scene {
     create() {
         console.log("startScene#create");
         this.add.image(400, 300, "clutter1");
-        this.add.image(500, 400, "creature");
-        this.creature?.setInteractive();
+        this.creature = this.add.sprite(500, 400, "creature");
+        this.creature.setInteractive();
 
         //keeping score
         this.scoreText = this.add.text(16, 16, "Score: 0", {
@@ -34,13 +34,13 @@ export default class startScene extends Phaser.Scene {
         this.input.on(
             "pointerdown",
             (
-                pointer: Phaser.Input.Pointer,
+                pointer: Phaser.Input.Pointer, // we don't use the pointer param but if we don't include it it returns a pointer manager instead ugh
                 objectsClicked: Phaser.GameObjects.Sprite[]
             ) => {
-                if (objectsClicked[0] == this.creature) {
-                    alert("woagh");
-                } else {
-                    alert("sad");
+                console.log(objectsClicked);
+                if (objectsClicked.length > 0) {
+                    this.clickGuy();
+                    // CHANGE SCENE HERE
                 }
             }
         );
