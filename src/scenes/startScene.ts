@@ -3,7 +3,7 @@ import Phaser from "phaser";
 export default class startScene extends Phaser.Scene {
     creature?: Phaser.GameObjects.Sprite;
     score = 0;
-    private scoreText: Phaser.GameObjects.Text;
+    scoreText: Phaser.GameObjects.Text;
 
     constructor() {
         super({ key: "startScene" });
@@ -41,6 +41,17 @@ export default class startScene extends Phaser.Scene {
                 if (objectsClicked.length > 0) {
                     this.clickGuy();
                     // CHANGE SCENE HERE
+                    // stop updating scene
+                    this.scene.stop();
+                    //send data to new scene
+                    console.log(this.score);
+                    console.log(this.scoreText);
+
+                    // swap to new scene
+                    this.scene.start("clutter1Scene", {
+                        score: this.score,
+                        scoreText: this.scoreText,
+                    });
                 }
             }
         );
