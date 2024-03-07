@@ -1,9 +1,13 @@
 import Phaser from "phaser";
-import MainScene from "./scenes/mainScene";
+import startScene from "./scenes/startScene";
 import PreloadScene from "./scenes/preloadScene";
+import clutter1Scene from "./scenes/clutter1Scene";
+import clutter2Scene from "./scenes/clutter2Scene";
+import clutter3Scene from "./scenes/clutter3Scene";
+import endScene from "./scenes/endScene";
 
-const DEFAULT_WIDTH = 1280;
-const DEFAULT_HEIGHT = 720;
+const DEFAULT_WIDTH = 800;
+const DEFAULT_HEIGHT = 600;
 
 export const CONFIG = {
     title: "My Untitled Phaser 3 Game",
@@ -17,7 +21,14 @@ export const CONFIG = {
         width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT,
     },
-    scene: [PreloadScene, MainScene],
+    scene: [
+        PreloadScene,
+        startScene,
+        clutter1Scene,
+        clutter2Scene,
+        clutter3Scene,
+        endScene,
+    ],
     physics: {
         default: "arcade",
         arcade: {
