@@ -1,34 +1,41 @@
 import Phaser from "phaser";
+import { dataSent } from "../objects/dataSent";
 
-export default class startScene extends Phaser.Scene {
-    creature?: Phaser.GameObjects.Sprite;
+export default class clutter2Scene extends Phaser.Scene {
     score = 0;
     scoreText: Phaser.GameObjects.Text;
-
+    creature: Phaser.GameObjects.Sprite;
     constructor() {
-        super({ key: "startScene" });
-        console.log("startScene#constructor");
+        super({ key: "clutter2Scene" });
+        console.log("clutter2Scene#constructor");
     }
 
-    init() {
-        console.log("startScene#init");
+    init(data: dataSent) {
+        console.log("clutter2Scene#init");
+        this.score = data.score;
+        this.scoreText = data.scoreText;
     }
 
     preload() {
-        console.log("startScene#preload");
+        console.log("clutter2Scene#preload");
     }
 
     create() {
-        console.log("startScene#create");
-        this.add.image(400, 300, "title");
-        this.creature = this.add.sprite(400, 320, "creature");
+        console.log("clutter2Scene#create");
+        this.add.image(400, 300, "clutter2");
+        this.creature = this.add.sprite(500, 100, "creatureDarker");
+        // creature has to be interactive to click on
         this.creature.setInteractive();
 
-        //keeping score
-        this.scoreText = this.add.text(16, 16, "Score: 0", {
+        // score stuff
+        this.scoreText = this.add.text(16, 16, `Score: ${this.score}`, {
             fontSize: "32px",
             color: "#fff",
         });
+
+        // Note: I didn't wanna have to paste this but extending the class by the startScene was causing errors
+        // and I didn't have a lot of time so I gave up
+        // sorry for spaghetti code :[
 
         //input
         this.input.on(
@@ -48,7 +55,7 @@ export default class startScene extends Phaser.Scene {
                     console.log(this.scoreText);
 
                     // swap to new scene
-                    this.scene.start("clutter1Scene", {
+                    this.scene.start("clutter3Scene", {
                         score: this.score,
                         scoreText: this.scoreText,
                     });
@@ -64,6 +71,6 @@ export default class startScene extends Phaser.Scene {
     }
 
     update() {
-        console.log("startScene#update");
+        console.log("clutter2Scene#update");
     }
 }
